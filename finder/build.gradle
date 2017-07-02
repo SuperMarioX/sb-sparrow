@@ -1,0 +1,47 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven {url "http://maven.aliyun.com/nexus/content/groups"}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+// http://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-use-tomcat-7
+// sovle [A child container failed during start spring boot]
+ext['tomcat.version'] = '7.0.59'
+repositories {
+	mavenCentral()
+    maven {url "http://maven.aliyun.com/nexus/content/groups"}
+}
+
+
+ext {
+	springCloudVersion = 'Dalston.SR1'
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // solve [A child container failed during start spring boot]
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile group:'org.apache.tomcat', name:'tomcat-juli', version:property('tomcat.version')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
