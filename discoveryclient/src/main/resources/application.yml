@@ -9,3 +9,13 @@ server:
 spring:
   application:
     name: service-hi
+  datasource:
+    url: jdbc:mysql://localhost:3306/test1
+    username: root
+    password: Passw0rd
+    driverClassName: com.mysql.jdbc.Driver
+
+
+
+mybatis:
+  typeAliasesPackage: com.supermario.sparrow.disclient.model
