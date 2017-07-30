@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: mybatisxml
+  datasource:
+    url: jdbc:mysql://localhost:3306/test1
+    username: root
+    password: Passw0rd
+    driverClassName: com.mysql.jdbc.Driver
+
+
+mybatis:
+  typeAliasesPackage: com.supermario.sparrow.mybatisxml.entity
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
